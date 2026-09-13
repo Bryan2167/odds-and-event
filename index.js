@@ -1,6 +1,6 @@
 const bank = [];
 const odds = [];
-const events = [];
+const evens = [];
 
 function addToBank(number) {
   bank.push(number);
@@ -10,7 +10,7 @@ function addToBank(number) {
 function sort() {
   const number = bank.shift();
   if (number % 2 === 0) {
-    events.push(number);
+    evens.push(number);
   } else {
     odds.push(number);
   }
@@ -40,14 +40,15 @@ function NumberForm() {
     <button type="submit" data-action="sortAll"> Sort All</button>
   `;
 
-  $form.addventListener("submit", (event) => {
+  $form.addEventListener("submit", (event) => {
     event.preventDefault();
     const action = event.submitter.dataset.action;
+
     if (action === "add") {
       const data = new FormData($form);
       const number = data.get("number");
 
-      if (nuber === null || number === "") return;
+      if (number === null || number === "") return;
 
       addToBank(+number);
     } else if (action === "sortOne") {
@@ -67,7 +68,7 @@ function NumberInBank(n) {
 }
 
 function NumberBank(label, numbers) {
-  const $bank = document.createElement("selection");
+  const $bank = document.createElement("section");
   $bank.classList.add("bank");
   $bank.innerHTML = `
     <h2>${label}</h2>
